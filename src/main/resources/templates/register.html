@@ -21,7 +21,7 @@
 </div>
 
 <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-    <h1 th:text="#{register.signin}" class="text-3xl font-bold mb-6 text-center text-gray-800">Sign in</h1>
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Sign in</h1>
 
     <form th:action="@{/register}" method="post" th:object="${user}" class="space-y-5">
         <div>
@@ -62,10 +62,10 @@
         </button>
     </form>
 
-    <p th:text="#{sign.account}"class="mt-6 text-center text-gray-600">
-        Já tem uma conta?
-        <a th:text="#{sign.log}" href="/login" class="text-blue-600 hover:underline font-semibold">Login aqui</a>
-    </p>
+    <div class="mt-6 text-center">
+        <span th:text="#{sign.account}" class="text-gray-600">Já tem uma conta?</span>
+        <a th:text="#{sign.log}" th:href="@{/login}" class="text-blue-500 hover:underline">Login aqui</a>
+    </div>
 </div>
 </body>
 </html>
