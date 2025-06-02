@@ -34,12 +34,13 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/login", "/register").permitAll()
-                        .requestMatchers("/shelters/edit/**", "/shelters/delete/**").hasAnyRole("ADMIN", "VOLUNTEER")
+                        .requestMatchers("/shelters/edit/**", "/shelters/delete/**", "/shelters/new", "/shelters/save").hasAnyRole("ADMIN", "VOLUNTEER")
                         .requestMatchers("/shelters").hasAnyRole("USER", "ADMIN", "VOLUNTEER")
                         .requestMatchers("/").authenticated()
-                        .anyRequest().authenticated()
+                        .anyRequest().denyAll()
                 )
-                .userDetailsService(customUserDetailsService) // injeta aqui explicitamente
+
+                .userDetailsService(customUserDetailsService)
                 .formLogin(form -> form
                         .loginPage("/login")
                         .defaultSuccessUrl("/", true)
