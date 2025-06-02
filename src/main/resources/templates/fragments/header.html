@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body class="bg-gray-100">
+<!-- Header -->
+<header class="bg-white shadow-md mb-20">
+  <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+    <form th:action="@{/logout}" method="post" class="inline">
+      <button type="submit" class="text-gray-600 hover:text-blue-600 bg-transparent border-none cursor-pointer">
+        <i data-lucide="log-out"></i>
+      </button>
+    </form>
+
+    <div class="flex gap-4 justify-end mb-4">
+      <a href="?lang=pt" class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-sm hover:bg-gray-100">
+        <img src="https://flagcdn.com/w40/br.png" alt="Português" width="24" height="18" />
+        Português
+      </a>
+      <a href="?lang=en" class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gray-300 text-sm hover:bg-gray-100">
+        <img src="https://flagcdn.com/w40/us.png" alt="English" width="24" height="18" />
+        English
+      </a>
+    </div>
+
+    <nav class="hidden md:flex space-x-6">
+      <a th:href="@{/shelters}" th:text="#{shelter.header}"
+         class="text-gray-600 hover:text-blue-600">Abrigos</a>
+      <a th:href="@{/ia}" class="text-gray-600 hover:text-blue-600">Spring AI</a>
+    </nav>
+    <div class="md:hidden">
+      <button id="hamburger" class="focus:outline-none">
+        <svg class="hamburger w-6 h-6 text-gray-800" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <nav id="mobileMenu" class="md:hidden bg-white shadow-md">
+    <a th:href="@{/}" class="block px-4 py-2 text-gray-600 hover:bg-gray-100">Home</a>
+    <a th:href="@{/shelters}" th:text="#{shelter.header}" class="text-gray-600 hover:text-blue-600">Shelters</a>
+    <a th:href="@{/ia}" class="text-gray-600 hover:text-blue-600">Spring AI</a>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+      const hamburger = document.getElementById('hamburger');
+      const mobileMenu = document.getElementById('mobileMenu');
+
+      hamburger.addEventListener('click', function () {
+          mobileMenu.classList.toggle('hidden');
+          hamburger.querySelector('.hamburger').classList.toggle('active');
+      });
+  });
+</script>
+</body>
+</html>

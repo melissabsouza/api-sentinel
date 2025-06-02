@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Abrigos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --cor-vermelho: #60a333;
+            --cor--azul: #003EA6;
+        }
+    </style>
+</head>
+<body class="p-6 bg-gray-100 w-full justify-items-center">
+
+<div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-300 w-full max-w-4xl items-center justify-center">
+    <div class="flex flex-col items-center mb-6">
+        <h2 th:text="#{shelter.title}" class="text-2xl font-extrabold mb-2 text-blue-700">Cadastro de Abrigos</h2>
+        <a th:text="#{shelter.list}" class="text-sm hover:underline text-blue-700 flex items-center gap-1"
+           th:href="@{/shelters}">
+            <svg class="w-4 h-4" stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M3 12h18M3 6h18M3 18h18"/>
+            </svg>
+            Lista de Abrigos
+        </a>
+    </div>
+
+    <div th:if="${error}"
+         class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded-lg mb-6 flex items-center"
+         role="alert">
+        <svg class="fill-current w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg"
+             viewBox="0 0 20 20">
+            <path d="M10 15a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-.707-9.707a1 1 0 0 1 1.414 0L11 6.586l.293-.293a1 1 0 0 1 1.414 1.414L12.414 8l.293.293a1 1 0 0 1-1.414 1.414L11 9.414l-.293.293a1 1 0 0 1-1.414-1.414L9.586 8l-.293-.293a1 1 0 0 1 0-1.414z"/>
+        </svg>
+        <span th:text="${error}">Erro de validação</span>
+    </div>
+
+
+    <form th:action="@{/shelters}" method="post" th:object="${shelter}" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <input type="hidden" th:field="*{address.id}">
+        <input type="hidden" th:field="*{contact.id}">
+        <input type="hidden" th:field="*{id}">
+
+        <div class="flex flex-col">
+            <label th:text="#{name.shelter}" for="name" class="block font-medium">Nome</label>
+            <input type="text" id="name" th:field="*{name}" class="mt-1 w-full p-2 border rounded-lg border-gray-300"
+                   required/>
+            <li th:each="err : ${#fields.errors('name')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+        <div class="flex flex-col">
+            <label th:text="#{capacity}" for="totalCapacity" class="block font-medium">Capacidade Total</label>
+            <input type="number" id="totalCapacity" th:field="*{totalCapacity}" class="mt-1 w-full p-2 border rounded-lg border-gray-300"
+                   required/>
+            <li th:each="err : ${#fields.errors('totalCapacity')}" th:text="${err}" class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+        <div class="flex flex-col">
+            <label th:text="#{current.capacity}" for="currentCapacity" class="block font-medium">Capacidade Atual</label>
+            <input type="number" id="currentCapacity" th:field="*{currentCapacity}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('currentCapacity')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+
+        <div class="flex flex-col">
+            <label th:text="#{resources}" for="availableResources" class="block font-medium">Recursos Disponíveis</label>
+            <input type="text" id="availableResources" th:field="*{availableResources}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('availableResources')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+
+        <div class="flex flex-col">
+            <label for="status" class="block font-medium">Status</label>
+            <select th:field="*{status}" class="mt-1 w-full p-2 border rounded-lg border-gray-300">
+                <option th:value="null" disabled selected>Selecione o status</option>
+                <option th:value="CLOSED">Fechado</option>
+                <option th:value="OPEN">Aberto</option>
+                <option th:value="CROWDED">Cheio</option>
+
+            </select>
+            <li th:each="err : ${#fields.errors('status')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+        <div class="flex flex-col">
+            <label th:text="#{user.email}" for="userEmail" class="block font-medium">Email do voluntário responsável</label>
+            <input type="email" id="userEmail" th:field="*{userEmail}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('userEmail')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+        <div class="flex flex-col col-span-2">
+        <h3 th:text="#{contact}" class="text-xl font-semibold mb-2">Contato</h3>
+        <div class="flex flex-col">
+            <label th:text="#{email}" for="email" class="block font-medium">Email do Abrigo</label>
+            <input type="email" id="email" th:field="*{contact.email}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('availableResources')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+        </div>
+
+        <div class="flex flex-col">
+            <label th:text="#{phone}" for="phone" class="block font-medium">Telefone</label>
+            <input type="text" id="phone" th:field="*{contact.phone}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('availableResources')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+        </div>
+        </div>
+
+<!--        endereco-->
+
+        <div class="flex flex-col col-span-2">
+            <h3 th:text="#{address.text}" class="text-xl font-semibold mb-2">Endereço</h3>
+            <label th:text="#{address.street}" for="street" class="block font-medium">Rua</label>
+            <input type="text" id="street" th:field="*{address.street}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('address.street')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+
+            <label th:text="#{address.number}" for="number" class="block font-medium mt-2">Número</label>
+            <input type="number" id="number" th:field="*{address.number}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('address.number')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+
+            <label th:text="#{address.district}" for="district" class="block font-medium mt-2">Bairro</label>
+            <input type="text" id="district" th:field="*{address.district}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('address.district')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+
+            <label for="cep" class="block font-medium mt-2">CEP</label>
+            <input type="text" id="cep" th:field="*{address.cep}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('address.cep')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+
+            <label th:text="#{address.city}" for="city" class="block font-medium mt-2">Cidade</label>
+            <input type="text" id="city" th:field="*{address.city}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('address.city')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+
+            <label th:text="#{address.state}" for="state" class="block font-medium mt-2">Estado</label>
+            <input type="text" id="state" th:field="*{address.state}"
+                   class="mt-1 w-full p-2 border rounded-lg border-gray-300" required/>
+            <li th:each="err : ${#fields.errors('address.state')}" th:text="${err}"
+                class="text-red-500 text-sm mt-1"></li>
+
+        </div>
+
+        <div class="flex justify-center mt-6 col-span-2">
+            <button th:text="#{save.button}" type="submit" class="px-6 py-2 rounded-lg text-white transition-colors"
+                    style="background-color: var(--cor-vermelho);">
+                Salvar
+            </button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    lucide.createIcons();
+</script>
+</body>
+</html>
