@@ -10,12 +10,12 @@ spring:
     name: sentinel-api
 
   rabbitmq:
-    host: rabbitmq
+    host: localhost
     port: 5672
     username: guest
     password: guest
   mail:
-    host: smtp-server
+    host: localhost
     port: 1025
     properties:
       mail:
