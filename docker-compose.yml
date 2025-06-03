@@ -21,19 +21,19 @@ services:
       - local_network
     restart: unless-stopped
 
-#  spring-app:
-#    build:
-#      context: .
-#      dockerfile: ./Dockerfile
-#    ports:
-#      - "8080:8080"
-#    networks:
-#      - local_network
-#      - monitoring
-#    depends_on:
-#      - rabbitmq
-#      - smtp-server
-#    restart: always
+  spring-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - local_network
+      - monitoring
+    depends_on:
+      - rabbitmq
+      - smtp-server
+    restart: always
 
 networks:
   monitoring:
