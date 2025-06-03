@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  smtp-server:
+    image: haravich/fake-smtp-server
+    container_name: fake-smtp
+    ports:
+      - "1025:1025"
+      - "1080:1080"
+    networks:
+      - local_network
+    restart: unless-stopped
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - local_network
+    restart: unless-stopped
+
+#  spring-app:
+#    build:
+#      context: .
+#      dockerfile: ./Dockerfile
+#    ports:
+#      - "8080:8080"
+#    networks:
+#      - local_network
+#      - monitoring
+#    depends_on:
+#      - rabbitmq
+#      - smtp-server
+#    restart: always
+
+networks:
+  monitoring:
+    driver: bridge
+  local_network:
+    driver: bridge

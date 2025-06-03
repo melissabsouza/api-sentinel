@@ -11,6 +11,7 @@ import br.com.fiap.sentinel_api.repository.UserRepository;
 import br.com.fiap.sentinel_api.service.mapper.AddressMapper;
 import br.com.fiap.sentinel_api.service.mapper.ContactMapper;
 import br.com.fiap.sentinel_api.service.mapper.ShelterMapper;
+import br.com.fiap.sentinel_api.service.mq.ShelterEmailService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,8 @@ public class ShelterService {
 
     private ShelterRepository shelterRepository;
     private UserRepository userRepository;
+
+    private final ShelterEmailService shelterEmailService;
 
 
     public ShelterDTO saveShelter(ShelterDTO shelterDTO){
@@ -55,7 +58,9 @@ public class ShelterService {
         shelter.setAddress(address);
         shelter.setContact(contact);
 
-        shelter = shelterRepository.save(shelter);
+        shelter = shelterEmailService.signShelter(shelter);
+
+//        shelter = shelterRepository.save(shelter);
         return ShelterMapper.toDto(shelter);
     }
 
