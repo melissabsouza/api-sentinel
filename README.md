@@ -15,7 +15,7 @@
  ### 📹 Testando API: 
 
  ### 🌐 Para acessar: 
- - Criar um usuário como voluntário para ver todas os endpoints da API
+ - Criar um usuário como voluntário para ver todos os endpoints da API
  - Rodar o comando `docker-compose up --build -d` no terminal
  - Acessar em `localhost:8080` no browser
  
