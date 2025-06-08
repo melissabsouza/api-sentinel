@@ -36,7 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/register", "/api/**", "/access-denied").permitAll()
                         .requestMatchers("/shelters/edit/**", "/shelters/delete/**", "/shelters/new", "/shelters/save").hasAnyRole("ADMIN", "VOLUNTEER")
                         .requestMatchers("/shelters").hasAnyRole("USER", "ADMIN", "VOLUNTEER")
-                        .requestMatchers("/").authenticated()
+                        .requestMatchers("/", "/recommendation").authenticated()
                         .anyRequest().denyAll()
                 )
 

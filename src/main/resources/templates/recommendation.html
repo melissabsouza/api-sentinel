@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Recomendação de Abrigos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+
+    <div th:insert="~{fragments/header :: header}">
+        MENU NO HEADER
+    </div>
+    <div class="place-items-center">
+
+<div class="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full">
+    <h1 class="text-2xl font-bold text-center text-blue-700 mb-6">Encontrar Abrigos Ideais</h1>
+
+    <form th:action="@{/recommendation}" th:object="${request}" method="post" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">Cidade</label>
+            <input type="text" th:field="*{city}"
+                   class="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+
+        <div class="space-y-2">
+            <label class="flex items-center gap-2">
+                <input type="checkbox" th:field="*{accessibility}" class="accent-blue-600" />
+                Acessibilidade
+            </label>
+            <label class="flex items-center gap-2">
+                <input type="checkbox" th:field="*{acceptPets}" class="accent-blue-600" />
+                Aceita Pets
+            </label>
+            <label class="flex items-center gap-2">
+                <input type="checkbox" th:field="*{withChildren}" class="accent-blue-600" />
+                Com Crianças
+            </label>
+            <label class="flex items-center gap-2">
+                <input type="checkbox" th:field="*{elderly}" class="accent-blue-600" />
+                Com Idosos
+            </label>
+            <label class="flex items-center gap-2">
+                <input type="checkbox" th:field="*{emergency}" class="accent-blue-600" />
+                Situação de Emergência
+            </label>
+        </div>
+
+        <div class="text-center mt-6">
+            <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
+                Buscar Abrigos
+            </button>
+        </div>
+    </form>
+
+    <div th:if="${respostaIA}" class="mt-8 p-4 bg-blue-50 border-l-4 border-blue-400 rounded">
+        <h2 class="text-lg font-semibold text-blue-700 mb-2">Recomendação da IA:</h2>
+        <p th:text="${respostaIA}" class="text-gray-700"></p>
+    </div>
+</div>
+    </div>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
