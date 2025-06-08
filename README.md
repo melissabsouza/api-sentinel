@@ -11,8 +11,17 @@
 
 ---
 
- ### 📹 Video Pitch:
+ ### 📹 Vídeo Pitch:
  ### 📹 Testando API: 
+
+ ### 🌐 Para acessar: 
+ - Criar um usuário como voluntário para ver todas os endpoints da API
+ - Rodar o comando `docker-compose up --build -d` no terminal
+ - Acessar em `localhost:8080` no browser
+ 
+
+ ### Deploy: https://gs-sentinel-api.azurewebsites.net/
+ **Para a matéria de DevOps, o link permite apenas o CRUD com MSSQL Server devido ao acesso limitado ao Oracle SQL. No deploy, não foram incluídas segurança, mensageria e Spring AI, pois o uso de containers consumiria todos os créditos disponíveis.**
 
 ---
 # 🏠 Sentinel
