@@ -11,7 +11,7 @@
 
 ---
 
- ### 📹 Vídeo Pitch:
+ ### 📹 Vídeo Pitch: https://youtu.be/LxNFbdvOtjE
  ### 📹 Vídeo Testando API: https://drive.google.com/file/d/1O6L9W7GVsTJwvtpnOJY5Ucw2tLJzJAFO/view?usp=sharing
  (youtube removeu o vídeo)
 
